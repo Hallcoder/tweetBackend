@@ -1,4 +1,4 @@
-
+const properties=
     [
         {
         "created_at": "Wed Mar 13 23:01:36 +0000 2013",
@@ -503,5 +503,5 @@
         "possibly_sensitive": false,
         "lang": "en"
     }]
-
+module.exports = properties
 
