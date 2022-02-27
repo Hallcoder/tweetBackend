@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const Joi = require("joi");
 const { date, link } = require("joi");
 const props = require("./properties");
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 app.listen(PORT, () => {
