@@ -9,7 +9,7 @@ const path = require("path");
 const cors = require("cors");
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(static("/public"))
 app.listen(PORT, () => {
   console.log(`Server is running Carry on , on ${PORT}`);
 });
