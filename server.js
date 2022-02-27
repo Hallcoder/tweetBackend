@@ -5,8 +5,10 @@ const Joi = require("joi");
 const { date, link } = require("joi");
 const props = require("./properties");
 const PORT = process.env.PORT || 3000;
-const path = require('path')
+const cors = require('cors');
+
 app.use(bodyParser.json());
+app.use(cors());
 
 app.listen(PORT, () => {
   console.log(`Server is running Carry on , on ${PORT}`);
@@ -27,7 +29,7 @@ app.get("/tweets", (req, res) => {
       text: props[i].text,
     });
   }
-  res.sendFile(path.join(__dirname,"../twitterFAV-API/index.html"))
+  res.send(tweets);
 });
 
 app.get("/users", (req, res) => {
