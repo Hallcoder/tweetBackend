@@ -5,6 +5,7 @@ const Joi = require("joi");
 const { date, link } = require("joi");
 const props = require("./properties");
 const PORT = process.env.PORT || 3000;
+const path = require('path')
 const cors = require('cors');
 app.use(bodyParser.json());
 app.use(cors());
@@ -81,3 +82,7 @@ app.get("/user/:screen_name", (req, res) => {
   }
   res.send(user);
 });
+
+app.get("/post.html",(res)=>{
+  res.send(path.join(__dirname,'./post.html'))
+})
