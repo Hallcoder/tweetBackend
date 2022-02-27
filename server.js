@@ -83,6 +83,6 @@ app.get("/user/:screen_name", (req, res) => {
   res.send(user);
 });
 
-app.get("/post.html",(res)=>{
-  res.send(path.join(__dirname,'post.html'))
+app.get("/post",(req, res)=>{
+  res.send(path.join(__dirname,'/post.html'))
 })
