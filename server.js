@@ -6,7 +6,6 @@ const { date, link } = require("joi");
 const props = require("./properties");
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
-
 app.use(bodyParser.json());
 app.use(cors());
 
