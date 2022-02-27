@@ -5,6 +5,7 @@ const Joi = require("joi");
 const { date, link } = require("joi");
 const props = require("./properties");
 const PORT = process.env.PORT || 3000;
+const path = require('path')
 app.use(bodyParser.json());
 
 app.listen(PORT, () => {
@@ -26,7 +27,7 @@ app.get("/tweets", (req, res) => {
       text: props[i].text,
     });
   }
-  res.send(tweets);
+  res.sendFile(path.join(__dirname,"../twitterFAV-API/index.html"))
 });
 
 app.get("/users", (req, res) => {
