@@ -5,8 +5,8 @@ const Joi = require("joi");
 const { date, link } = require("joi");
 const props = require("./properties");
 const PORT = process.env.PORT || 3000;
-const path = require('path')
-const cors = require('cors');
+const path = require("path");
+const cors = require("cors");
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -45,7 +45,11 @@ app.get("/links", (req, res) => {
   try {
     for (i = 0; i < props.length; i++) {
       for (prop in props[i]) {
-        if ( JSON.stringify(props[i][prop]).search(/https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}/i) > 0)
+        if (
+          JSON.stringify(props[i][prop]).search(
+            /https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}/i
+          ) > 0
+        )
           links.push(props[i][prop]);
       }
     }
@@ -83,6 +87,6 @@ app.get("/user/:screen_name", (req, res) => {
   res.send(user);
 });
 
-app.get("/post",(req, res)=>{
-  res.send(path.join(__dirname,'/post.html'))
-})
+app.get("/post", (req, res) => {
+  res.sendFile(path.join(__dirname, "/post.html"));
+});
