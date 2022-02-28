@@ -13,7 +13,7 @@ app.listen(PORT, () => {
   console.log(`Server is running Carry on , on ${PORT}`);
 });
 
-mongoose.connect("mongodb://localhost/twitter")
+mongoose.connect("mongodb+srv://Brainiacs_user:*****@cluster0.wmwkp.mongodb.net/test?authSource=admin&replicaSet=atlas-2kdib7-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true/twitter")
 .then(_ => console.log("Connected to the db...."))
 
 app.use(bodyParser.json());
