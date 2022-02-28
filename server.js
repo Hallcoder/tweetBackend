@@ -82,7 +82,7 @@ app.post("/tweet/post", async(req,res)=>{
       text:req.body.text
     })
     await tweet.save();
-    res.send(req.body)
+    res.send(tweet)
       }
   catch(err){
    return res.send(err.message)
