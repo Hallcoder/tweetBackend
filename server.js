@@ -5,19 +5,24 @@ const Joi = require("joi");
 const { date, link } = require("joi");
 const props = require("./properties");
 const PORT = process.env.PORT || 3000;
-const path = require("path");
+const mongoose = require('mongoose');
 const cors = require("cors");
-app.use(bodyParser.json());
-app.use(cors());
-app.use(express.static("public"))
+const { tweetSchema } = require("./tweetSchema");
+
 app.listen(PORT, () => {
   console.log(`Server is running Carry on , on ${PORT}`);
 });
-let schema = Joi.object({
-  createTime: Joi.date().min().required(),
-  id: Joi.number().required(),
-  text: Joi.string().min(5).required(),
-});
+
+mongoose.connect("mongodb://localhost/twitter")
+.then(_ => console.log("Connected to the db...."))
+
+app.use(bodyParser.json());
+app.use(cors());
+// let schema = Joi.object({
+//   createTime: Joi.date().min().required(),
+//   id: Joi.number().required(),
+//   text: Joi.string().min(5).required(),
+// });
 
 let tweets = [];
 
@@ -40,29 +45,11 @@ app.get("/users", (req, res) => {
   res.send(users);
 });
 
-app.get("/links", (req, res) => {
-  let links = [];
-  try {
-    for (i = 0; i < props.length; i++) {
-      for (prop in props[i]) {
-        if (
-          JSON.stringify(props[i][prop]).search(
-            /https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}/i
-          ) > 0
-        )
-          links.push(props[i][prop]);
-      }
-    }
-  } catch (err) {
-    console.log("Error:" + err.message);
-  }
 
-  res.send(links);
-});
 
 app.get("/tweet/:id", (req, res) => {
   var result;
-  let { error } = props.find((c) => c.id == req.params.id);
+  let  error  = props.find((c) => c.id == req.params.id);
   if (error)
     return res
       .status(404)
@@ -87,4 +74,36 @@ app.get("/user/:screen_name", (req, res) => {
   res.send(user);
 });
 
+app.post("/tweet/post", async(req,res)=>{
+  
+  try{
+    const tweet = new tweetSchema({
+      createTime:Date.now(),
+      text:req.body.text
+    })
+    await tweet.save();
+  
+      }
+  catch(err){
+   return res.send(err.message)
+  }
+  res.send(req.body)
+})
 
+// app.get("/links", (req, res) => {
+//   let links = [];
+//   try {
+//     for (i = 0; i < props.length; i++) {
+//       for (prop in props[i]) {
+//         if (JSON.stringify(props[i][prop]).search(/https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}/) > 0){
+//           links.push(props[i][prop]);
+//         }   
+//       }
+//     }
+//   } 
+//   catch (err) {
+//     console.log("Error:" + err.message);
+//   }
+//   res.send(links)
+
+// });
