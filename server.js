@@ -87,7 +87,7 @@ app.post("/tweet/post", async(req,res)=>{
   catch(err){
    return res.send(err.message)
   }
-  res.send(req.body)
+  res.send(JSON.stringify(req.body))
 })
 
 // app.get("/links", (req, res) => {
