@@ -87,6 +87,4 @@ app.get("/user/:screen_name", (req, res) => {
   res.send(user);
 });
 
-app.get("/post", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/post.html"));
-});
+
