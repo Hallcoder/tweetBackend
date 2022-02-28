@@ -77,15 +77,15 @@ app.get("/user/:screen_name", (req, res) => {
 app.post("/tweet/post", async(req,res)=>{
   
   try{
-    const tweet = new tweetSchema({
+    const tweet = await new tweetSchema({
       createTime:Date.now(),
       text:req.body.text
     })
     await tweet.save();
-    res.json({tweet})
+    return res.json({tweet});
       }
   catch(err){
-   return res.json({error: err.message})
+   return res.json({error: err.message});
   }
   
 })
