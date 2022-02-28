@@ -82,12 +82,12 @@ app.post("/tweet/post", async(req,res)=>{
       text:req.body.text
     })
     await tweet.save();
-  
+    res.send(req.body)
       }
   catch(err){
    return res.send(err.message)
   }
-  res.send(JSON.stringify(req.body))
+  
 })
 
 // app.get("/links", (req, res) => {
