@@ -75,15 +75,13 @@ app.get("/user/:screen_name", (req, res) => {
 });
 
 app.post("/tweet/post", async(req,res)=>{
-  
   try{
     const tweet = await new tweetSchema({
       createTime:Date.now(),
       text:req.body.text
     })
-    const newTweet = JSON.stringify(tweet)
     await tweet.save();
-    res.end(newTweet);
+    res.json({tweet});
       }
   catch(err){
    return res.json({ error: err.message});
