@@ -82,7 +82,7 @@ app.post("/tweet/post", async(req,res)=>{
       text:JSON.stringify(req.body.text)
     })
     await tweet.save();
-    return res.json({tweet});
+    return res.send(JSON.stringify({tweet: tweet}));
       }
   catch(err){
    return res.json({ error: err.message});
