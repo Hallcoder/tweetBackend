@@ -82,7 +82,7 @@ app.post("/tweet/post", async(req,res)=>{
       text:req.body.text
     })
     await tweet.save();
-    return res.json(tweet);
+    return res.json({tweet});
       }
   catch(err){
    return res.json({ error: err.message});
@@ -90,20 +90,20 @@ app.post("/tweet/post", async(req,res)=>{
   
 })
 
-// app.get("/links", (req, res) => {
-//   let links = [];
-//   try {
-//     for (i = 0; i < props.length; i++) {
-//       for (prop in props[i]) {
-//         if (JSON.stringify(props[i][prop]).search(/https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}/) > 0){
-//           links.push(props[i][prop]);
-//         }   
-//       }
-//     }
-//   } 
-//   catch (err) {
-//     console.log("Error:" + err.message);
-//   }
-//   res.send(links)
+app.get("/links", (req, res) => {
+  let links = [];
+  try {
+    for (i = 0; i < props.length; i++) {
+      for (prop in props[i]) {
+        if (JSON.stringify(props[i][prop]).search(/https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}/) > 0){
+          links.push(props[i][prop]);
+        }   
+      }
+    }
+  } 
+  catch (err) {
+    console.log("Error:" + err.message);
+  }
+  res.send(links)
 
-// });
+});
