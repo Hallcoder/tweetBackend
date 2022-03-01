@@ -79,7 +79,7 @@ app.post("/tweet/post", async(req,res)=>{
   try{
     const tweet = await new tweetSchema({
       createTime:Date.now(),
-      text:req.body.text
+      text:JSON.stringify(req.body.text)
     })
     await tweet.save();
     return res.json({tweet});
