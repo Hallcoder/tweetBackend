@@ -79,10 +79,11 @@ app.post("/tweet/post", async(req,res)=>{
   try{
     const tweet = await new tweetSchema({
       createTime:Date.now(),
-      text:JSON.stringify(req.body.text)
+      text:req.body.text
     })
+    const newTweet = JSON.stringify(tweet)
     await tweet.save();
-    return res.send(JSON.stringify({tweet: tweet}));
+    res.end(newTweet);
       }
   catch(err){
    return res.json({ error: err.message});
