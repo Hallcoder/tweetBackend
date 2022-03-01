@@ -26,7 +26,7 @@ app.use(cors());
 
 let tweets = [];
 
-app.get("/tweets",async (req, res) => {
+app.get("/tweets",(req, res) => {
   for (i = 0; i < props.length; i++) {
     tweets.push({
       CreateTime: props[i].created_at,
@@ -34,7 +34,7 @@ app.get("/tweets",async (req, res) => {
       text: props[i].text,
     });
   }
-  await tweets.save()
+  
   res.send(tweets);
 });
 
